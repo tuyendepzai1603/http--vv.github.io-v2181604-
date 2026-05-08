@@ -1,103 +1,253 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Heart Animation</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Heart Explosion</title>
 
 <style>
+
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
 
 body{
+
     overflow:hidden;
+
     background:black;
+
     height:100vh;
+
 }
 
-.container{
-    position:relative;
-    width:100%;
-    height:100vh;
-}
+.center-heart{
 
-.heart{
     position:absolute;
-    width:30px;
-    height:30px;
+
+    top:50%;
+
+    left:50%;
+
+    width:120px;
+
+    height:120px;
+
     background:red;
-    transform:rotate(-45deg);
-    animation:float 4s linear infinite;
-    box-shadow:0 0 20px red;
+
+    transform:translate(-50%,-50%) rotate(-45deg);
+
+    animation:beat 1s infinite;
+
+    box-shadow:0 0 80px red;
+
 }
 
-.heart::before,
-.heart::after{
-    content:'';
+.center-heart::before,
+
+.center-heart::after{
+
+    content:"";
+
     position:absolute;
-    width:30px;
-    height:30px;
+
+    width:120px;
+
+    height:120px;
+
     background:red;
+
     border-radius:50%;
+
 }
 
-.heart::before{
-    top:-15px;
+.center-heart::before{
+
+    top:-60px;
+
     left:0;
+
 }
 
-.heart::after{
-    left:15px;
+.center-heart::after{
+
+    left:60px;
+
     top:0;
+
 }
 
-@keyframes float{
+.particle{
+
+    position:absolute;
+
+    width:25px;
+
+    height:25px;
+
+    background:red;
+
+    transform:rotate(-45deg);
+
+    box-shadow:0 0 20px red;
+
+    animation:explode 3s linear forwards;
+
+}
+
+.particle::before,
+
+.particle::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:25px;
+
+    height:25px;
+
+    background:inherit;
+
+    border-radius:50%;
+
+}
+
+.particle::before{
+
+    top:-12.5px;
+
+    left:0;
+
+}
+
+.particle::after{
+
+    left:12.5px;
+
+    top:0;
+
+}
+
+@keyframes explode{
+
     0%{
-        transform:translateY(0) rotate(-45deg) scale(1);
+
         opacity:1;
+
+        transform:translate(0,0) rotate(-45deg) scale(1);
+
     }
 
     100%{
-        transform:translateY(-120vh) rotate(-45deg) scale(2);
+
         opacity:0;
+
+        transform:
+
+        translate(var(--x), var(--y))
+
+        rotate(-45deg)
+
+        scale(0);
+
     }
+
 }
+
+@keyframes beat{
+
+    0%{
+
+        transform:translate(-50%,-50%) rotate(-45deg) scale(1);
+
+    }
+
+    50%{
+
+        transform:translate(-50%,-50%) rotate(-45deg) scale(1.15);
+
+    }
+
+    100%{
+
+        transform:translate(-50%,-50%) rotate(-45deg) scale(1);
+
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="container"></div>
+<div class="center-heart"></div>
 
 <script>
-const container = document.querySelector('.container');
 
-function createHeart(){
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
+function createParticle(){
 
-    heart.style.left = Math.random() * window.innerWidth + 'px';
+    const particle = document.createElement("div");
 
-    const size = Math.random() * 40 + 20;
-    heart.style.width = size + 'px';
-    heart.style.height = size + 'px';
+    particle.classList.add("particle");
 
-    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    particle.style.left = window.innerWidth / 2 + "px";
 
-    heart.style.background = `hsl(${Math.random()*30},100%,60%)`;
+    particle.style.top = window.innerHeight / 2 + "px";
 
-    container.appendChild(heart);
+    const angle = Math.random() * 2 * Math.PI;
+
+    const distance = Math.random() * 700 + 100;
+
+    const x = Math.cos(angle) * distance + "px";
+
+    const y = Math.sin(angle) * distance + "px";
+
+    particle.style.setProperty('--x', x);
+
+    particle.style.setProperty('--y', y);
+
+    const size = Math.random() * 25 + 10;
+
+    particle.style.width = size + "px";
+
+    particle.style.height = size + "px";
+
+    document.body.appendChild(particle);
 
     setTimeout(()=>{
-        heart.remove();
-    },6000);
+
+        particle.remove();
+
+    },3000);
+
 }
 
-setInterval(createHeart, 150);
+setInterval(()=>{
+
+    for(let i=0;i<8;i++){
+
+        createParticle();
+
+    }
+
+},200);
+
 </script>
 
 </body>
+
 </html>
