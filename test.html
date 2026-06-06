@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartphone/Watch Tag</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:20px;
+    text-align:center;
+    background:#fff;
+}
+
+.header{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.time{
+    font-size:70px;
+    color:blue;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.btn-box{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    color:white;
+    font-size:18px;
+}
+
+.qr{
+    background:#7ec8ff;
+}
+
+.card{
+    background:#2d2dff;
+}
+
+.info{
+    border:8px solid green;
+    padding:15px;
+    text-align:left;
+}
+
+.title{
+    text-align:center;
+    color:green;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.row{
+    margin:10px 0;
+    font-size:20px;
+}
+
+.label{
+    display:inline-block;
+    width:250px;
+}
+
+.value{
+    color:green;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Smartphone/Watch Tag</h2>
+
+<div class="header">2026-5-29 Thứ Sáu</div>
+
+<div class="time" id="clock">03:50:22</div>
+
+<div class="btn-box">
+    <button class="qr">Mã QR</button>
+    <button class="card">Thẻ kiểm soát</button>
+</div>
+
+<div class="info">
+
+<div class="title">
+Mac II Mang theo điện thoại thông minh/<br>
+đồng hồ<br>
+Thẻ kiểm soát1
+</div>
+
+<div class="row"><span class="label">Mã nhân viên:</span><span class="value">V2121394</span></div>
+
+<div class="row"><span class="label">Tên:</span><span class="value">鄭庭功</span></div>
+
+<div class="row"><span class="label">Mục đích sử dụng:</span><span class="value">對廠商</span></div>
+
+<div class="row"><span class="label">Thương hiệu điện thoại:</span><span class="value">Apple</span></div>
+
+<div class="row"><span class="label">Model điện thoại:</span><span class="value">iPhone xsmax</span></div>
+
+<div class="row"><span class="label">Màu điện thoại:</span><span class="value">黑色</span></div>
+
+<div class="row"><span class="label">Số serial điện thoại:</span><span class="value">F2MXFZP1KPHG</span></div>
+
+<div class="row"><span class="label">Khu vực được uỷ quyền bổ sung:</span><span class="value">對廠商</span></div>
+
+</div>
+
+<script>
+function updateClock() {
+    const now = new Date();
+    document.getElementById("clock").innerHTML =
+        now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
