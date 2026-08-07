@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Device Demo</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#ececec;
+}
+
+.header{
+    background:#03A9F4;
+    color:white;
+    text-align:center;
+    padding:18px;
+    font-weight:bold;
+    font-size:28px;
+}
+
+.clock{
+    text-align:center;
+    color:#2048ff;
+    font-size:75px;
+    font-weight:300;
+    margin-top:20px;
+}
+
+.btns{
+    display:flex;
+    justify-content:space-evenly;
+    margin:18px;
+}
+
+.btn{
+    width:42%;
+    padding:14px;
+    border-radius:8px;
+    color:white;
+    text-align:center;
+    font-size:20px;
+}
+
+.qr{
+    background:#1dd6e7;
+}
+
+.card{
+    background:#1d33ff;
+}
+
+.permission{
+    margin:20px;
+    border:10px solid red;
+    background:white;
+    padding:20px;
+}
+
+.permission h2{
+    color:red;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.demo{
+    color:#c00;
+    text-align:center;
+    font-size:15px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.row{
+    display:flex;
+    margin:10px 0;
+    font-size:20px;
+}
+
+.label{
+    width:180px;
+    color:#444;
+}
+
+.value{
+    color:#c00;
+    font-weight:bold;
+}
+
+.notice{
+    margin-top:20px;
+    line-height:1.6;
+    color:#333;
+    font-size:18px;
+}
+
+.footer{
+    text-align:center;
+    color:#888;
+    margin-top:25px;
+    font-size:15px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+Điện thoại thông minh / Đồng hồ thông minh
+</div>
+
+<div class="clock" id="clock">
+00:00:00
+</div>
+
+<div class="btns">
+<div class="btn qr">QR DEMO</div>
+<div class="btn card">Thông tin</div>
+</div>
+
+<div class="permission">
+
+<h2>Thiết bị thông minh</h2>
+
+<div class="demo">
+DEMO - KHÔNG CÓ GIÁ TRỊ KIỂM SOÁT
+</div>
+
+<div class="row">
+<div class="label">Tên:</div>
+<div class="value">Nguyễn Văn A</div>
+</div>
+
+<div class="row">
+<div class="label">Thương hiệu:</div>
+<div class="value">HONOR</div>
+</div>
+
+<div class="row">
+<div class="label">Model:</div>
+<div class="value">X9c</div>
+</div>
+
+<div class="row">
+<div class="label">Màu:</div>
+<div class="value">Đen</div>
+</div>
+
+<div class="row">
+<div class="label">Serial:</div>
+<div class="value">DEMO-123456789</div>
+</div>
+
+<div class="row">
+<div class="label">Khu vực:</div>
+<div class="value">Demo Area</div>
+</div>
+
+<div class="notice">
+Mang điện thoại vào khu vực demo để kiểm thử giao diện.
+<br><br>
+Đây chỉ là giao diện mô phỏng phục vụ học HTML/CSS và không có giá trị xác thực.
+</div>
+
+</div>
+
+<div class="footer">
+Demo UI © 2026
+</div>
+
+<script>
+
+function updateClock(){
+
+let d=new Date();
+
+let h=String(d.getHours()).padStart(2,'0');
+let m=String(d.getMinutes()).padStart(2,'0');
+let s=String(d.getSeconds()).padStart(2,'0');
+
+document.getElementById("clock").innerHTML=h+":"+m+":"+s;
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+</script>
+
+</body>
+</html>
