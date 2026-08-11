@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="vi">
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260811-05-f555caa","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/7949ff62d67710d5.telemetry_sdk.js" integrity="sha512-KIvXA82Di44YY/RH9/63A9MuTuavYgDFG8PfErJn7Wli4K0LAOk+coo/aPXk3+ZNL96nHh9VYD4PE+fLes+laQ=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm Soát Điện Thoại Thông Minh</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/0e8d3a91e1c6f495.data_sdk.js" integrity="sha512-c00oDoGjsMgluCLLEyVl3suwEkgjOGGplVFbsilUoBg4aMKNmsL3mwsc9r0dPn95qiSZyjBousQXgROkAW7p/w=="></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #12374b;
+      --cyan: #00b8cf;
+      --deep-blue: #064cd6;
+      --danger: #f20f16;
+      --paper: #f6f8fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 100%;
+      font-family: "Libre Franklin", sans-serif;
+      color: var(--ink);
+    }
+
+    .app-shell {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      background:
+        linear-gradient(rgba(255,255,255,.89), rgba(246,248,250,.96)),
+        repeating-linear-gradient(0deg, transparent 0 28px, rgba(0,121,145,.035) 29px);
+    }
+
+    .device-frame {
+      width: min(100%, 510px);
+      margin: 0 auto;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(4, 70, 109, .09), 0 18px 50px rgba(21, 47, 62, .16);
+    }
+
+    .topbar {
+      background: #00aeca;
+      border-bottom: 4px solid #008ca8;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #d7ff47;
+      box-shadow: 0 0 0 3px rgba(215, 255, 71, .22);
+      animation: pulse 1.7s infinite;
+    }
+
+    @keyframes pulse {
+      50% { transform: scale(.7); opacity: .6; }
+    }
+
+    .clock-panel {
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .clock-panel::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -160px;
+      right: -70px;
+      border: 24px solid rgba(0, 174, 202, .08);
+      border-radius: 50%;
+    }
+
+    .clock-value {
+      letter-spacing: -.07em;
+      font-variant-numeric: tabular-nums;
+      color: #154ee5;
+      line-height: .86;
+    }
+
+    .mode-button {
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+
+    .mode-button:hover { transform: translateY(-1px); filter: brightness(.98); }
+    .mode-button.is-active { box-shadow: 0 4px 0 rgba(0,0,0,.14), 0 10px 19px rgba(9, 74, 129, .18); }
+
+    .control-card {
+      border: 6px solid var(--danger);
+      box-shadow: 0 4px 0 rgba(184, 13, 17, .14);
+    }
+
+    .field-input, .field-select {
+      width: 100%;
+      border: 1px solid #b7c3ca;
+      border-radius: 5px;
+      color: #153749;
+      background: #fff;
+      padding: .6rem .72rem;
+      font-size: .87rem;
+      outline: none;
+      transition: border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .field-input:focus, .field-select:focus {
+      border-color: #00aeca;
+      box-shadow: 0 0 0 3px rgba(0, 174, 202, .16);
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: .34rem;
+      font-size: .72rem;
+      font-weight: 700;
+      color: #ca0d16;
+    }
+
+    .record-card {
+      border-left: 4px solid #00afc9;
+      animation: slideIn .28s ease both;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .status-message { min-height: 1.2rem; }
+
+    @media (min-width: 640px) {
+      .device-frame {
+        margin-top: 18px;
+        margin-bottom: 18px;
+        min-height: calc(100 * min(var(--vh, 1vh), 1vh) - 36px);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+    }
+  </style>
+  <script src="/_sdk/04cc6185e046f597.resizing_sdk.js" type="text/javascript" integrity="sha512-CiE/G92aQF0nxneFg1kdOvXih8sQ1Z2a2QI3+r/WvzJwQqH6+IyB3iL07OkJmpm3ABAaf07+FnqWny98f5sR6w=="></script>
+ </head>
+ <body data-template-id="__page-root">
+  <div class="app-shell">
+   <div class="device-frame">
+    <header data-template-id="app-header" class="canva-header topbar px-5 pt-4 pb-4 text-white">
+     <div class="flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+       <div class="rounded-xl border border-white/30 bg-white/15 p-2" aria-hidden="true"><i data-lucide="smartphone" class="h-5 w-5"></i>
+       </div>
+       <div>
+        <h1 data-template-id="app-title" class="canva-text font-extrabold leading-tight"></h1>
+        <p data-template-id="app-subtitle" class="canva-text mt-1 text-xs text-white/85"></p>
+       </div>
+      </div>
+      <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wide"><span class="live-dot" aria-hidden="true"></span> <span data-template-id="online-status" class="canva-text"></span>
+      </div>
+     </div>
+    </header>
+    <main class="px-4 pb-8 pt-4">
+     <section class="clock-panel rounded-xl border border-slate-200 px-4 py-4 text-center shadow-sm" aria-labelledby="clock-heading">
+      <p data-template-id="clock-label" id="clock-heading" class="canva-text relative text-xs font-bold uppercase tracking-[.14em]"></p><time id="live-clock" class="clock-value relative mt-2 block text-5xl font-bold sm:text-6xl" aria-live="polite">00:00:00</time>
+      <p id="live-date" class="mt-2 text-xs font-semibold text-slate-500"></p>
+     </section>
+     <nav class="mt-4 grid grid-cols-2 gap-3" aria-label="Chọn phương thức kiểm soát"><button data-template-id="qr-mode-button" id="qr-mode" class="canva-button mode-button is-active rounded-md px-3 py-3 text-sm font-bold" type="button" aria-pressed="true"> <span class="flex items-center justify-center gap-2"><i data-lucide="qr-code" class="h-4 w-4"></i><span></span></span> </button> <button data-template-id="card-mode-button" id="card-mode" class="canva-button mode-button rounded-md px-3 py-3 text-sm font-bold" type="button" aria-pressed="false"> <span class="flex items-center justify-center gap-2"><i data-lucide="contact" class="h-4 w-4"></i><span></span></span> </button>
+     </nav>
+     <section data-template-id="control-form-panel" class="canva-panel control-card mt-5 rounded-md bg-white p-4" aria-labelledby="form-title">
+      <div class="mb-4 flex items-start gap-2"><i data-lucide="shield-check" class="mt-0.5 h-5 w-5 text-red-600" aria-hidden="true"></i>
+       <div>
+        <h2 data-template-id="form-title" id="form-title" class="canva-text font-extrabold"></h2>
+        <p data-template-id="form-helper" class="canva-text mt-1 text-xs leading-relaxed"></p>
+       </div>
+      </div>
+      <form id="control-form">
+       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div><label data-template-id="employee-id-label" class="canva-text field-label" for="ma_nhan_vien"></label> <input class="field-input" id="ma_nhan_vien" name="ma_nhan_vien" type="text" required autocomplete="off">
+        </div>
+        <div><label data-template-id="name-label" class="canva-text field-label" for="ten"></label> <input class="field-input" id="ten" name="ten" type="text" required autocomplete="name">
+        </div>
+        <div class="sm:col-span-2"><label data-template-id="purpose-label" class="canva-text field-label" for="muc_dich_su_dung"></label> <input class="field-input" id="muc_dich_su_dung" name="muc_dich_su_dung" type="text" required autocomplete="off">
+        </div>
+        <div><label data-template-id="brand-label" class="canva-text field-label" for="thuong_hieu"></label> <input class="field-input" id="thuong_hieu" name="thuong_hieu" type="text" required autocomplete="off">
+        </div>
+        <div><label data-template-id="model-label" class="canva-text field-label" for="model"></label> <input class="field-input" id="model" name="model" type="text" required autocomplete="off">
+        </div>
+        <div><label data-template-id="color-label" class="canva-text field-label" for="mau_dien_thoai"></label> <input class="field-input" id="mau_dien_thoai" name="mau_dien_thoai" type="text" autocomplete="off">
+        </div>
+        <div><label data-template-id="serial-label" class="canva-text field-label" for="serial_5g"></label> <input class="field-input" id="serial_5g" name="serial_5g" type="text" autocomplete="off">
+        </div>
+        <div class="sm:col-span-2"><label data-template-id="area-label" class="canva-text field-label" for="khu_vuc_bo_sung"></label> <input class="field-input" id="khu_vuc_bo_sung" name="khu_vuc_bo_sung" type="text" autocomplete="off">
+        </div>
+        <div class="sm:col-span-2"><label data-template-id="control-type-label" class="canva-text field-label" for="loai_kiem_soat"></label> <select class="field-select" id="loai_kiem_soat" name="loai_kiem_soat" required> <option value="Mới">Mới</option> <option value="Kiểm tra lại">Kiểm tra lại</option> <option value="Bổ sung thông tin">Bổ sung thông tin</option> </select>
+        </div>
+       </div><button data-template-id="save-button" id="save-button" class="canva-button mt-5 flex w-full items-center justify-center gap-2 rounded-md px-4 py-3 font-bold transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-65" type="submit"> <i data-lucide="save" class="h-4 w-4" aria-hidden="true"></i> <span></span> </button>
+       <p id="form-status" class="status-message mt-3 text-center text-xs font-semibold" role="status" aria-live="polite"></p>
+      </form>
+     </section>
+     <section class="mt-6" aria-labelledby="recent-title">
+      <div class="mb-3 flex items-center justify-between">
+       <h2 data-template-id="recent-title" id="recent-title" class="canva-text font-extrabold"></h2><span id="record-count" class="rounded-full bg-cyan-100 px-2.5 py-1 text-xs font-bold text-cyan-800">0</span>
+      </div>
+      <p data-template-id="recent-helper" id="empty-state" class="canva-text rounded-lg border border-dashed border-slate-300 bg-white px-4 py-5 text-center text-sm"></p>
+      <div id="record-list" class="space-y-3"></div>
+     </section>
+    </main>
+    <footer data-template-id="app-footer" class="canva-footer border-t border-slate-200 px-5 py-4 text-center">
+     <p data-template-id="footer-text" class="canva-text text-xs"></p>
+    </footer>
+   </div>
+  </div>
+  <template id="record-template">
+   <article data-template-id="record-card" class="canva-card record-card rounded-lg bg-white p-3 shadow-sm">
+    <div class="flex items-start justify-between gap-3">
+     <div>
+      <h3 class="record-name font-bold text-slate-800"></h3>
+      <p class="record-id mt-1 text-xs font-semibold text-cyan-700"></p>
+     </div><span data-template-id="record-tag" class="canva-tag rounded-full px-2 py-1 text-[10px] font-bold"></span>
+    </div>
+    <p class="record-device mt-3 text-xs leading-relaxed text-slate-600"></p>
+    <p class="record-time mt-2 border-t border-slate-100 pt-2 text-[10px] font-medium text-slate-400"></p>
+   </article>
+  </template>
+  <script src="/_sdk/1a0e63f7a958ec3e.editing_sdk.js" integrity="sha512-lW+iibZ5vXaBl3IQ1K3ooQE1gfdDZxiO+Y7NpWdeypLOwr1WIYo3edm3nu+wyePemyM75tcU3yV7YyImK9wxMQ=="></script>
+  <script>
+    const appState = {
+      records: [],
+      selectedMode: "Mã QR",
+      initialized: false
+    };
+
+    const form = document.getElementById("control-form");
+    const saveButton = document.getElementById("save-button");
+    const statusEl = document.getElementById("form-status");
+    const listEl = document.getElementById("record-list");
+    const emptyState = document.getElementById("empty-state");
+    const countEl = document.getElementById("record-count");
+
+    function setStatus(message, tone) {
+      statusEl.textContent = message;
+      statusEl.className = "status-message mt-3 text-center text-xs font-semibold " + (
+        tone === "error" ? "text-red-600" : tone === "success" ? "text-emerald-600" : "text-slate-500"
+      );
+    }
+
+    function formatDate(iso) {
+      return new Intl.DateTimeFormat("vi-VN", {
+        hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit", year: "numeric"
+      }).format(new Date(iso));
+    }
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("live-clock").textContent = new Intl.DateTimeFormat("vi-VN", {
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+      }).format(now);
+      document.getElementById("live-date").textContent = new Intl.DateTimeFormat("vi-VN", {
+        weekday: "long", day: "2-digit", month: "2-digit", year: "numeric"
+      }).format(now);
+    }
+
+    function updateRecordElement(element, record) {
+      element.dataset.recordId = record.__backendId;
+      element.querySelector(".record-name").textContent = record.ten;
+      element.querySelector(".record-id").textContent = "MNV: " + record.ma_nhan_vien;
+      element.querySelector(".record-tag").textContent = record.loai_kiem_soat;
+      const device = [record.thuong_hieu, record.model, record.mau_dien_thoai].filter(Boolean).join(" · ");
+      element.querySelector(".record-device").textContent =
+        (device ? device + " — " : "") + (record.muc_dich_su_dung || "Chưa có mục đích");
+      element.querySelector(".record-time").textContent = "Kiểm tra: " + formatDate(record.thoi_gian_check);
+    }
+
+    function renderRecords(records) {
+      appState.records = records.slice().sort((a, b) => new Date(b.thoi_gian_check) - new Date(a.thoi_gian_check));
+      countEl.textContent = String(appState.records.length);
+      emptyState.classList.toggle("hidden", appState.records.length > 0);
+
+      const existing = new Map([...listEl.children].map((element) => [element.dataset.recordId, element]));
+      appState.records.slice(0, 12).forEach((record) => {
+        const found = existing.get(record.__backendId);
+        if (found) {
+          updateRecordElement(found, record);
+          existing.delete(record.__backendId);
+          return;
+        }
+        const fragment = document.getElementById("record-template").content.cloneNode(true);
+        const element = fragment.querySelector("article");
+        updateRecordElement(element, record);
+        listEl.appendChild(fragment);
+      });
+      existing.forEach((element) => element.remove());
+    }
+
+    function selectMode(mode) {
+      appState.selectedMode = mode;
+      const qr = document.getElementById("qr-mode");
+      const card = document.getElementById("card-mode");
+      const isQr = mode === "Mã QR";
+      qr.classList.toggle("is-active", isQr);
+      card.classList.toggle("is-active", !isQr);
+      qr.setAttribute("aria-pressed", String(isQr));
+      card.setAttribute("aria-pressed", String(!isQr));
+    }
+
+    document.getElementById("qr-mode").addEventListener("click", () => selectMode("Mã QR"));
+    document.getElementById("card-mode").addEventListener("click", () => selectMode("Thẻ kiểm soát"));
+
+    const dataHandler = {
+      onDataChanged(data) {
+        renderRecords(data);
+      }
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!appState.initialized) {
+        setStatus("Đang kết nối dữ liệu, vui lòng thử lại trong giây lát.", "error");
+        return;
+      }
+      if (appState.records.length >= 999) {
+        setStatus("Đã đạt giới hạn 999 bản ghi. Vui lòng xóa bớt dữ liệu trong Canva Sheet.", "error");
+        return;
+      }
+      if (!form.reportValidity()) return;
+
+      saveButton.disabled = true;
+      setStatus("Đang lưu thông tin kiểm soát...", "neutral");
+
+      const formData = new FormData(form);
+      const record = {
+        ma_nhan_vien: formData.get("ma_nhan_vien").trim(),
+        ten: formData.get("ten").trim(),
+        muc_dich_su_dung: formData.get("muc_dich_su_dung").trim(),
+        thuong_hieu: formData.get("thuong_hieu").trim(),
+        model: formData.get("model").trim(),
+        mau_dien_thoai: formData.get("mau_dien_thoai").trim(),
+        serial_5g: formData.get("serial_5g").trim(),
+        khu_vuc_bo_sung: formData.get("khu_vuc_bo_sung").trim(),
+        thoi_gian_check: new Date().toISOString(),
+        loai_kiem_soat: appState.selectedMode + " · " + formData.get("loai_kiem_soat")
+      };
+
+      const result = await window.dataSdk.create(record);
+      saveButton.disabled = false;
+
+      if (result.isOk) {
+        form.reset();
+        setStatus("Đã lưu thông tin kiểm soát thành công.", "success");
+      } else {
+        setStatus("Không thể lưu bản ghi. Vui lòng kiểm tra lại và thử lại.", "error");
+      }
+    });
+
+    async function initialize() {
+      updateClock();
+      setInterval(updateClock, 1000);
+      lucide.createIcons();
+
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (initResult.isOk) {
+        appState.initialized = true;
+        setStatus("", "neutral");
+      } else {
+        setStatus("Không thể kết nối Canva Sheet. Vui lòng tải lại ứng dụng.", "error");
+      }
+    }
+
+    initialize();
+  </script>
+ </body>
+</html>
